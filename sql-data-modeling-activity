@@ -1,0 +1,58 @@
+Features
+	users can sign into the app with their email and password
+	users can create recipes with ingredients and instructions
+	recipes can be marked as public or private
+	users can view other people’s recipes
+	ingredients from recipes can be added to user’s grocery lists
+	users can create their own occasions and assign recipes to occasions
+	
+Table Ideas / Brainstorming
+	users: user_id, username
+	auth: user_id, email, password
+	recipes: recipe_id, ingredients, instructions, public_view boolean
+	occasions: occasion_id, user
+	grocery_list: list_id, 
+	
+Relationships
+	One to Many
+		USERS to RECIPES
+		USERS to OCCASIONS
+		RECIPES to GROCERY_LIST
+		
+	One to One
+		USERS to AUTH
+		USERS to GROCERY_LIST
+	
+	Many to Many
+		RECIPES to OCCASIONS
+		
+Columns
+	user
+		user_id - primary key, integer because it's a numeric ID
+		username - varchar, because the entry will be a length limited string
+		name - varchar, because the entry will be a length limited string
+	
+	auth
+		auth_id - primary key, integer becasue it's a numeric ID
+		user_id - integer, because it is a numeric value
+		email - varchar, because the entry will be a length limited string
+		password - varchar, because the entry will be a length limited string
+	
+	recipes
+		recipe_id - primary key, integer because it's a numeric ID
+		user_id - integer, because it is a numeric value
+		ingredients - text, because this field will not be length limited.
+		instructions - text, because this field will not be length limuted.
+		public_view - boolean, because this will be true or falls as to the visibility of the recipes
+		
+	grocery_list
+		list_id - primary key, integer because it's a numeric ID
+		user_id - integer, because it's a numeric value
+		ingredients - text, becuase this field will not be length limited
+		recipe - text, because this field will not be length limited
+		
+	occassions
+		occasion_id - primary key, integer because it's a numeric ID
+		user_id - integer, because it's a numeric value
+		recipe - text, because this field will not be length limited
+		event_name - varchar, because the entry will be a length limited string
