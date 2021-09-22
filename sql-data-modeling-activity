@@ -51,8 +51,46 @@ Columns
 		ingredients - text, becuase this field will not be length limited
 		recipe - text, because this field will not be length limited
 		
-	occassions
+	occasions
 		occasion_id - primary key, integer because it's a numeric ID
 		user_id - integer, because it's a numeric value
 		recipe - text, because this field will not be length limited
 		event_name - varchar, because the entry will be a length limited string
+		
+		
+PostgreSQL code
+
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  username varchar(255),
+  name varchar(255)
+);
+
+CREATE TABLE auth (
+  auth_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(user_id),
+  email varchar(255),
+  password varchar(255)
+);
+
+CREATE TABLE occasions (
+  occasion_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(user_id),
+  recipe text,
+  event_name varchar(50)
+);
+
+CREATE TABLE recipes (
+  recipe_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(user_id),
+  ingredients text,
+  instructions text,
+  public_view bool
+);
+
+CREATE TABLE grocery_list (
+	list_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(user_id),
+  ingredients text,
+  recipe text
+);
